@@ -10,6 +10,8 @@ public class CinnamonCinemaTestData {
                                     customerContactNo,
                                     customerEmail);
     public static int noOfSeats = 3;
+    public static String invalidNoOfSeats = "a";
+    public static int invalidNoOfSeatsOutOfRange = 6;
     public static String outputString = "Seats have been allocated to " +
             customerName+ "[ " +customerAddress + ", "+ customerContactNo+" ], "+
             customerEmail;

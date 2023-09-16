@@ -67,17 +67,24 @@ public class Customer {
         prompt = "Enter your contact number: ";
         String customerContactNumber = getUserInput(prompt, scanner);
 
-        System.out.println("Enter number of seats between 1 and 3 for booking");
-        int noOfSeats = Integer.parseInt(scanner.nextLine());
+
+        int noOfSeats = 0;
+        String pattern = "\\d+\\s*";
+        boolean isValid = false;
+        while(noOfSeats == 0 || !isValid) {
+            System.out.println("Enter number of seats between 1 and 3 for booking");
+            String inputStr = scanner.nextLine();
+            if (inputStr.matches(pattern)){
+                noOfSeats = Integer.parseInt(inputStr);
+                if (noOfSeats >= 1 && noOfSeats <=3)
+                    isValid = true;
+            }
+        }
 
         Customer customer = new Customer(customerName,
                                         customerAddress,
                                         customerEmail,
                                         customerContactNumber);
         return new Object[] {customer, noOfSeats};
-    }
-
-    public static void main(String[] args) {
-        getAndValidateCustomerInput();
     }
 }

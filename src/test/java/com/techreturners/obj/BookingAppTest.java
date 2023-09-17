@@ -8,20 +8,23 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BookingAppTest {
     BookingApp bookingApp;
+    Booking booking;
     @BeforeEach
     public void setUp(){
         bookingApp = new BookingApp();
+        booking = new Booking();
     }
 
     @Test
     public void testCheckAvailableSeatsValid() throws IOException,
             NumberFormatException{
         ArrayList<SeatNumber> availableSeatsActual =
-                bookingApp.checkAvailableSeats(CinnamonCinemaTestData.noOfSeats);
+                bookingApp.checkAvailableSeats(CinnamonCinemaTestData.noOfSeats,
+                        booking);
 
         assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).getRow(),
                 availableSeatsActual.get(0).getRow());
@@ -38,14 +41,42 @@ public class BookingAppTest {
     public void testCheckAvailableSeatsEmpty() throws IOException,
             NumberFormatException{
         ArrayList<SeatNumber> availableSeatsActual =
-                bookingApp.checkAvailableSeats(CinnamonCinemaTestData.noOfSeats);
+                bookingApp.checkAvailableSeats(CinnamonCinemaTestData.noOfSeats,
+                        booking);
 
         assertEquals(0,
                 availableSeatsActual.size());
     }
 
-    public void testCanAllocatSeats() {
+    @Test
+    public void testCanAllocatSeatsTrue() {
+        //Test when only two seats are allocated and customer wants to book 3 seats
+        assertTrue(bookingApp.canAllocateSeats(CinnamonCinemaTestData.availableListExpected,
+                CinnamonCinemaTestData.noOfSeats,
+                booking));
+    }
 
+    @Test
+    public void testCanAllocatSeatsFalseAllSeatsFull() {
+        ArrayList<SeatNumber> availableListFull = new ArrayList<>();
+        //Test when all seats are allocated
+        boolean isSeatAvailable = bookingApp.canAllocateSeats(
+                CinnamonCinemaTestData.initialiseAllOccupiedSeats(CinnamonCinemaTestData.TOTAL_SEATS),
+                CinnamonCinemaTestData.noOfSeats,
+                booking);
+        assertFalse(isSeatAvailable);
+    }
+
+    @Test
+    public void testCanAllocatSeatsFalseWhenNoOfSeatsMoreThanAvailableSeats() {
+        //Test when two seats are available to book but user has requested 3 seats
+        ArrayList<SeatNumber> availableListFull = new ArrayList<>();
+        //Test when all seats are allocated
+        boolean isSeatAvailable = bookingApp.canAllocateSeats(
+                CinnamonCinemaTestData.initialiseAllOccupiedSeats(CinnamonCinemaTestData.TOTAL_FILLED_SEATS),
+                CinnamonCinemaTestData.noOfSeats,
+                booking);
+        assertFalse(isSeatAvailable);
     }
 
 }

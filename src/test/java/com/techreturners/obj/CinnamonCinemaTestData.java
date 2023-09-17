@@ -1,5 +1,8 @@
 package com.techreturners.obj;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class CinnamonCinemaTestData {
     public static String customerName = "Harry Potter";
     public static String customerAddress = "4 Privet Drive, Surrey, UK";
@@ -15,4 +18,8 @@ public class CinnamonCinemaTestData {
     public static String outputString = "Seats have been allocated to " +
             customerName+ "[ " +customerAddress + ", "+ customerContactNo+" ], "+
             customerEmail;
+    public static SeatNumber seatNumberOne = new SeatNumber(Row.A,Seat.ONE);
+    public static SeatNumber seatNumberTwo = new SeatNumber(Row.A,Seat.TWO);
+    public static ArrayList<SeatNumber> availableListExpected =
+            new ArrayList<>(Arrays.asList(seatNumberOne, seatNumberTwo));
 }

@@ -76,7 +76,7 @@ public class Customer {
             String inputStr = scanner.nextLine();
             if (inputStr.matches(pattern)){
                 noOfSeats = Integer.parseInt(inputStr);
-                if (noOfSeats >= 1 && noOfSeats <=3)
+                if ((noOfSeats >= 1) && (noOfSeats <= 3))
                     isValid = true;
             }
         }

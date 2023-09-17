@@ -99,4 +99,5 @@ public class CustomerTest {
                 customerInput.getCustomerEmail());
         assertEquals(CinnamonCinemaTestData.noOfSeats, noOfSeatsInput);
     }
+
 }

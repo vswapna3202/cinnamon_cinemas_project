@@ -24,8 +24,6 @@ public class CinnamonCinemaTestData {
     public static SeatNumber seatNumberThree = new SeatNumber(Row.A,Seat.THREE);
     public static SeatNumber seatNumberFour = new SeatNumber(Row.A,Seat.FOUR);
     public static SeatNumber seatNumberFive = new SeatNumber(Row.A,Seat.FIVE);
-    public static char lockStatus = 'Y';
-
     public static ArrayList<SeatNumber> newSeatsExpected =
             new ArrayList<>(Arrays.asList(seatNumberThree,seatNumberFour,
                     seatNumberFive));
@@ -83,13 +81,5 @@ public class CinnamonCinemaTestData {
             }
         }
         return availableSeatsFull;
-    }
-
-    public static void setLockStatusForTestData(){
-        for(int i=0; i < CinnamonCinemaTestData.allocatedSeatsExpectedEnd.size();
-                i++){
-            CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).setLocked('Y');
-            CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).setLocked('Y');
-        }
     }
 }

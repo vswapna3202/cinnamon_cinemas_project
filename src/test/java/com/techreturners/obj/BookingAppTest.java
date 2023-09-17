@@ -89,8 +89,6 @@ public class BookingAppTest {
                     allocatedSeatsActual.get(i).getRow());
             assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(i).getSeat(),
                     allocatedSeatsActual.get(i).getSeat());
-            assertEquals(CinnamonCinemaTestData.lockStatus,
-                    allocatedSeatsActual.get(i).isLocked());
         }
     }
 
@@ -98,7 +96,6 @@ public class BookingAppTest {
     public void testGenerateSeatNumbersWithThreeRemainingSeats(){
         ArrayList<SeatNumber> availableListExpected =
                 CinnamonCinemaTestData.initialiseAllOccupiedSeats(12);
-        //CinnamonCinemaTestData.setLockStatusForTestData();
         ArrayList<SeatNumber> allocatedSeatsActual =
                 bookingApp.generateSeatNumbers(availableListExpected,
                         CinnamonCinemaTestData.noOfSeats);
@@ -107,8 +104,6 @@ public class BookingAppTest {
                     allocatedSeatsActual.get(i).getRow());
             assertEquals(CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).getSeat(),
                     allocatedSeatsActual.get(i).getSeat());
-            assertEquals(CinnamonCinemaTestData.lockStatus,
-                    allocatedSeatsActual.get(i).isLocked());
         }
     }
 
@@ -123,10 +118,15 @@ public class BookingAppTest {
             assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).getRow(),
                     allocatedSeatsActual.get(i).getRow());
             assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).getSeat(),
-                    allocatedSeatsActual.get(i).getSeat());
-            assertEquals(CinnamonCinemaTestData.lockStatus,
-                    allocatedSeatsActual.get(i).isLocked());
+                    allocatedSeatsActual.get(i).getSeat());;
         }
+    }
+
+    @Test
+    public void testAllocateAndSaveDataValid(){
+        assertTrue(bookingApp.allocateAndSaveSeats(CinnamonCinemaTestData.newSeatsExpected,
+                                    CinnamonCinemaTestData.noOfSeats,
+                                    booking));
     }
 
 }

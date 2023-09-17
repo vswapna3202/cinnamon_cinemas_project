@@ -13,12 +13,13 @@ public class BookingApp {
         Object[] input = Customer.getAndValidateCustomerInput();
         Customer customer = (Customer) input[0];
         int noOfSeats = (int) input[1];
+        boolean isSaveSuccess = false;
         try {
             Booking booking = new Booking();
             ArrayList<SeatNumber> seatNumbers = checkAvailableSeats(noOfSeats, booking);
             if (canAllocateSeats(seatNumbers, noOfSeats, booking)) {
-                generateSeatNumbers(seatNumbers, noOfSeats);
-                allocateAndSaveSeats(seatNumbers, noOfSeats, booking);
+                ArrayList<SeatNumber> newSeatNumbers = generateSeatNumbers(seatNumbers, noOfSeats);
+                isSaveSuccess = allocateAndSaveSeats(newSeatNumbers, noOfSeats, booking);
             }else{
                 throw new CustomCinnamonCinemaException("Seats are not available, " +
                         "cannot proceed with booking");
@@ -57,7 +58,6 @@ public class BookingApp {
             String seatStr = rowSeatNumber.substring(1);
             SeatNumber newRowSeatNumber = new SeatNumber(Row.valueOf(rowStr),
                     Seat.fromInt(Integer.parseInt(seatStr)));
-            newRowSeatNumber.setLocked('Y');
             newSeatNumbers.add(newRowSeatNumber);
             seatAllocatedSize++;
         }

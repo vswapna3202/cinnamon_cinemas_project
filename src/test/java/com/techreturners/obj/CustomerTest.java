@@ -20,8 +20,8 @@ public class CustomerTest {
         String simulatedInput = String.join("\n",
                 CinnamonCinemaTestData.customer.getCustomerName(),
                 CinnamonCinemaTestData.customer.getCustomerAddress(),
-                CinnamonCinemaTestData.customer.getCustomerContactNo(),
                 CinnamonCinemaTestData.customer.getCustomerEmail(),
+                CinnamonCinemaTestData.customer.getCustomerContactNo(),
                 String.valueOf(CinnamonCinemaTestData.noOfSeats)
         );
 
@@ -49,8 +49,8 @@ public class CustomerTest {
         String simulatedInput = String.join("\n",
                 "", CinnamonCinemaTestData.customerName,
                           "", CinnamonCinemaTestData.customerAddress,
-                          "", CinnamonCinemaTestData.customerContactNo,
                           "", CinnamonCinemaTestData.customerEmail,
+                          "", CinnamonCinemaTestData.customerContactNo,
                 String.valueOf(CinnamonCinemaTestData.noOfSeats)
         );
 
@@ -78,8 +78,8 @@ public class CustomerTest {
         String simulatedInput = String.join("\n",
                   CinnamonCinemaTestData.customerName,
                             CinnamonCinemaTestData.customerAddress,
-                            CinnamonCinemaTestData.customerContactNo,
                             CinnamonCinemaTestData.customerEmail,
+                            CinnamonCinemaTestData.customerContactNo,
                             CinnamonCinemaTestData.invalidNoOfSeats,
                 String.valueOf(CinnamonCinemaTestData.invalidNoOfSeatsOutOfRange),
                 String.valueOf(CinnamonCinemaTestData.noOfSeats)

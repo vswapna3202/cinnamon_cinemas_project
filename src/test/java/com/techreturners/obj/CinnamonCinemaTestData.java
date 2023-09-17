@@ -11,8 +11,9 @@ public class CinnamonCinemaTestData {
     public static String customerEmail = "harrypotter@hogwarts.com";
     public static Customer customer = new Customer(customerName,
                                     customerAddress,
-                                    customerContactNo,
-                                    customerEmail);
+                                    customerEmail,
+                                    customerContactNo
+                                    );
     public static int noOfSeats = 3;
     public static String invalidNoOfSeats = "a";
     public static int invalidNoOfSeatsOutOfRange = 6;
@@ -27,6 +28,15 @@ public class CinnamonCinemaTestData {
     public static ArrayList<SeatNumber> newSeatsExpected =
             new ArrayList<>(Arrays.asList(seatNumberThree,seatNumberFour,
                     seatNumberFive));
+
+    public static int ticketId = 1000;
+    //public static String patternData = "Dear .+";
+    public static String patternData = "Dear .+\n" +
+            "@ \\[ .+ - Contact:  .+\\] \n" +
+            "Your \\d+ ticket\\(s\\) has been booked \n" +
+            "Your ticket Id is: \\d+ \n" +
+            "It has been emailed to you @ .+\n" +
+            "Your seat numbers are: "+".+";
 
     public static ArrayList<SeatNumber> availableListExpected =
             new ArrayList<>(Arrays.asList(seatNumberOne, seatNumberTwo));

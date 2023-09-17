@@ -11,8 +11,8 @@ public class Customer {
 
     public Customer(String customerName,
                     String customerAddress,
-                    String customerContactNo,
-                    String customerEmail) {
+                    String customerEmail,
+                    String customerContactNo) {
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerContactNo = customerContactNo;

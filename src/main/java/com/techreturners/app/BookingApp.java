@@ -13,13 +13,20 @@ public class BookingApp {
         Object[] input = Customer.getAndValidateCustomerInput();
         Customer customer = (Customer) input[0];
         int noOfSeats = (int) input[1];
-        boolean isSaveSuccess = false;
+
         try {
             Booking booking = new Booking();
             ArrayList<SeatNumber> seatNumbers = checkAvailableSeats(noOfSeats, booking);
             if (canAllocateSeats(seatNumbers, noOfSeats, booking)) {
                 ArrayList<SeatNumber> newSeatNumbers = generateSeatNumbers(seatNumbers, noOfSeats);
-                isSaveSuccess = allocateAndSaveSeats(newSeatNumbers, noOfSeats, booking);
+                boolean isSaveSuccess = allocateAndSaveSeats(newSeatNumbers, noOfSeats, booking);
+                if (isSaveSuccess){
+                    int ticketId = seatNumbers.size()+1000;
+                    Ticket ticket = new Ticket(ticketId, newSeatNumbers);
+                    ticket.displayTicket(customer, noOfSeats);
+                }else{
+                    System.out.println("Your tickets were not booked! Try again later");
+                }
             }else{
                 throw new CustomCinnamonCinemaException("Seats are not available, " +
                         "cannot proceed with booking");
@@ -28,8 +35,8 @@ public class BookingApp {
             System.out.println("File seatMapping.txt is not found in folder config");
         }catch(IOException ioe){
             System.out.println("Could not read data from seatMapping.txt file, IOException occurred");
-        }catch(CustomCinnamonCinemaException ccce){
-            System.out.println(ccce.getMessage());
+        }catch(CustomCinnamonCinemaException cex){
+            System.out.println(cex.getMessage());
         }
     }
 
@@ -48,7 +55,6 @@ public class BookingApp {
     public ArrayList<SeatNumber> generateSeatNumbers(ArrayList<SeatNumber> seatNumbers,
                                                      int noOfSeats){
         int seatAllocatedSize = seatNumbers.size();
-        int index = noOfSeats;
         ArrayList<SeatNumber> newSeatNumbers = new ArrayList<>();
         SeatMap seatMap = new SeatMap();
         seatMap.initialiseSeatMap();

@@ -31,6 +31,13 @@ public class CinnamonCinemaTestData {
 
     public static ArrayList<SeatNumber> availableListExpected =
             new ArrayList<>(Arrays.asList(seatNumberOne, seatNumberTwo));
+
+    public static ArrayList<String> allocatedSeatsExpected =
+            new ArrayList<>(Arrays.asList("A3","A4","A5"));
+    public static ArrayList<String> allocatedSeatsExpectedEnd =
+            new ArrayList<>(Arrays.asList("C3","C4","C5"));
+    public static ArrayList<String> allocatedSeatsWithRowSwap =
+            new ArrayList<>(Arrays.asList("A4","A5","B1"));
     public static final int TOTAL_SEATS = 15;
     public static final int TOTAL_FILLED_SEATS = 13;
     public static final HashMap allSeatMap = new HashMap();

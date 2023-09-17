@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class SeatMap {
     HashMap<Integer, String> seatMap = new HashMap<>();
 
-    public HashMap initialiseSeatMap() {
+    public void initialiseSeatMap() {
         for (int i = 1; i <= 15; i++) {
             if (i >= 1 && i <= 5) {
                 seatMap.put(i, String.valueOf(Row.A) + String.valueOf(i));
@@ -15,6 +15,9 @@ public class SeatMap {
                 seatMap.put(i, String.valueOf(Row.C) + String.valueOf(i-10));
             }
         }
+    }
+
+    public HashMap<Integer, String> getSeatMap() {
         return seatMap;
     }
 }

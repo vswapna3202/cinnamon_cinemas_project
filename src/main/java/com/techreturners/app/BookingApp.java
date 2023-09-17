@@ -48,11 +48,19 @@ public class BookingApp {
         return booking.canAllocateSeats(seatNumbers, noOfSeats);
     }
 
-    public ArrayList<SeatNumber> generateSeatNumbers(ArrayList<SeatNumber> seatNumbers,
+    public ArrayList<String> generateSeatNumbers(ArrayList<SeatNumber> seatNumbers,
                                                      int noOfSeats){
         int seatAllocatedSize = seatNumbers.size();
         int index = noOfSeats;
-        ArrayList<SeatNumber> newSeatNumbers = new ArrayList<>();
+        ArrayList<String> newSeatNumbers = new ArrayList<>();
+        SeatMap seatMap = new SeatMap();
+        seatMap.initialiseSeatMap();
+        for (int i=0 ; i < noOfSeats; i++) {
+            newSeatNumbers.add(seatMap.getSeatMap().get(seatAllocatedSize + 1));
+            seatAllocatedSize++;
+        }
+        return newSeatNumbers;
+        /*
         int i = 0;
         while(i < noOfSeats){
                 Row row;
@@ -73,14 +81,15 @@ public class BookingApp {
                     newSeatNumbers.add(new SeatNumber(row,seat));
                 }
                 i++;
-            }
-        return newSeatNumbers;
+            }*/
+
     }
 
     public boolean allocateAndSaveSeats(ArrayList<SeatNumber> seatNumbers,
                                         int noOfSeats,
                                         Booking booking){
-        return booking.allocateAndSaveSeats(seatNumbers, noOfSeats);
+        //return booking.allocateAndSaveSeats(seatNumbers, noOfSeats);
+            return true;
     }
 
     public static void main(String[] args){

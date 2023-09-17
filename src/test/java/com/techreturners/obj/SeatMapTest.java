@@ -16,8 +16,8 @@ public class SeatMapTest {
     }
     @Test
     public void testInitialiseSeatMap(){
-        HashMap seatMapActual = seatMapClass.initialiseSeatMap();
+        seatMapClass.initialiseSeatMap();
         HashMap allSeatMapExpected = CinnamonCinemaTestData.initialiseAllSeatMap();
-        assertTrue(seatMapActual.equals(allSeatMapExpected));
+        assertTrue(seatMapClass.getSeatMap().equals(allSeatMapExpected));
     }
 }

@@ -24,6 +24,7 @@ public class CinnamonCinemaTestData {
     public static SeatNumber seatNumberThree = new SeatNumber(Row.A,Seat.THREE);
     public static SeatNumber seatNumberFour = new SeatNumber(Row.A,Seat.FOUR);
     public static SeatNumber seatNumberFive = new SeatNumber(Row.A,Seat.FIVE);
+    public static char lockStatus = 'Y';
 
     public static ArrayList<SeatNumber> newSeatsExpected =
             new ArrayList<>(Arrays.asList(seatNumberThree,seatNumberFour,
@@ -32,12 +33,15 @@ public class CinnamonCinemaTestData {
     public static ArrayList<SeatNumber> availableListExpected =
             new ArrayList<>(Arrays.asList(seatNumberOne, seatNumberTwo));
 
-    public static ArrayList<String> allocatedSeatsExpected =
-            new ArrayList<>(Arrays.asList("A3","A4","A5"));
-    public static ArrayList<String> allocatedSeatsExpectedEnd =
-            new ArrayList<>(Arrays.asList("C3","C4","C5"));
-    public static ArrayList<String> allocatedSeatsWithRowSwap =
-            new ArrayList<>(Arrays.asList("A4","A5","B1"));
+    public static ArrayList<SeatNumber> allocatedSeatsExpectedEnd =
+            new ArrayList<>(Arrays.asList(new SeatNumber(Row.C, Seat.THREE),
+                    new SeatNumber(Row.C,Seat.FOUR),
+                    new SeatNumber(Row.C, Seat.FIVE)));
+    public static ArrayList<SeatNumber> allocatedSeatsWithRowSwap =
+            new ArrayList<>(Arrays.asList(new SeatNumber(Row.A, Seat.FOUR),
+                    new SeatNumber(Row.A,Seat.FIVE),
+                    new SeatNumber(Row.B, Seat.ONE)));
+
     public static final int TOTAL_SEATS = 15;
     public static final int TOTAL_FILLED_SEATS = 13;
     public static final HashMap allSeatMap = new HashMap();
@@ -79,5 +83,13 @@ public class CinnamonCinemaTestData {
             }
         }
         return availableSeatsFull;
+    }
+
+    public static void setLockStatusForTestData(){
+        for(int i=0; i < CinnamonCinemaTestData.allocatedSeatsExpectedEnd.size();
+                i++){
+            CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).setLocked('Y');
+            CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).setLocked('Y');
+        }
     }
 }

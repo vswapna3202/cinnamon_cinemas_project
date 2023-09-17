@@ -5,10 +5,6 @@ import com.techreturners.obj.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BookingApp {
 
@@ -48,48 +44,30 @@ public class BookingApp {
         return booking.canAllocateSeats(seatNumbers, noOfSeats);
     }
 
-    public ArrayList<String> generateSeatNumbers(ArrayList<SeatNumber> seatNumbers,
+    public ArrayList<SeatNumber> generateSeatNumbers(ArrayList<SeatNumber> seatNumbers,
                                                      int noOfSeats){
         int seatAllocatedSize = seatNumbers.size();
         int index = noOfSeats;
-        ArrayList<String> newSeatNumbers = new ArrayList<>();
+        ArrayList<SeatNumber> newSeatNumbers = new ArrayList<>();
         SeatMap seatMap = new SeatMap();
         seatMap.initialiseSeatMap();
         for (int i=0 ; i < noOfSeats; i++) {
-            newSeatNumbers.add(seatMap.getSeatMap().get(seatAllocatedSize + 1));
+            String rowSeatNumber = seatMap.getSeatMap().get(seatAllocatedSize + 1);
+            String rowStr = rowSeatNumber.substring(0,1);
+            String seatStr = rowSeatNumber.substring(1);
+            SeatNumber newRowSeatNumber = new SeatNumber(Row.valueOf(rowStr),
+                    Seat.fromInt(Integer.parseInt(seatStr)));
+            newRowSeatNumber.setLocked('Y');
+            newSeatNumbers.add(newRowSeatNumber);
             seatAllocatedSize++;
         }
         return newSeatNumbers;
-        /*
-        int i = 0;
-        while(i < noOfSeats){
-                Row row;
-                Seat seat;
-                if (seatAllocatedSize <= 5){
-                    row = Row.A;
-                    seat = Seat.fromInt(index);
-                    newSeatNumbers.add(new SeatNumber(row,seat));
-                    index++;
-                    seatAllocatedSize++;
-                }else if (seatAllocatedSize >= 6 && seatAllocatedSize <= 10){
-                    row = Row.B;
-                    seat = Seat.fromInt(index);
-                    newSeatNumbers.add(new SeatNumber(row,seat));
-                }else {
-                    row = Row.C;
-                    seat = Seat.fromInt(index);
-                    newSeatNumbers.add(new SeatNumber(row,seat));
-                }
-                i++;
-            }*/
-
     }
 
-    public boolean allocateAndSaveSeats(ArrayList<SeatNumber> seatNumbers,
+     public boolean allocateAndSaveSeats(ArrayList<SeatNumber> seatNumbers,
                                         int noOfSeats,
                                         Booking booking){
-        //return booking.allocateAndSaveSeats(seatNumbers, noOfSeats);
-            return true;
+        return booking.allocateAndSaveSeats(seatNumbers, noOfSeats);
     }
 
     public static void main(String[] args){

@@ -81,37 +81,52 @@ public class BookingAppTest {
 
     @Test
     public void testGenerateSeatNumbersWithTwoSeatsAllocatedAlready(){
-        ArrayList<String> allocatedSeatsActual =
+        ArrayList<SeatNumber> allocatedSeatsActual =
                 bookingApp.generateSeatNumbers(CinnamonCinemaTestData.availableListExpected,
                         CinnamonCinemaTestData.noOfSeats);
-        assertEquals(CinnamonCinemaTestData.allocatedSeatsExpected.get(0),
-                allocatedSeatsActual.get(0));
-        assertEquals(CinnamonCinemaTestData.allocatedSeatsExpected.get(1),
-                allocatedSeatsActual.get(1));
-        assertEquals(CinnamonCinemaTestData.allocatedSeatsExpected.get(2),
-                allocatedSeatsActual.get(2));
+        for(int i = 0;i < CinnamonCinemaTestData.newSeatsExpected.size(); i++) {
+            assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(i).getRow(),
+                    allocatedSeatsActual.get(i).getRow());
+            assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(i).getSeat(),
+                    allocatedSeatsActual.get(i).getSeat());
+            assertEquals(CinnamonCinemaTestData.lockStatus,
+                    allocatedSeatsActual.get(i).isLocked());
+        }
     }
 
     @Test
     public void testGenerateSeatNumbersWithThreeRemainingSeats(){
         ArrayList<SeatNumber> availableListExpected =
                 CinnamonCinemaTestData.initialiseAllOccupiedSeats(12);
-        ArrayList<String> allocatedSeatsActual =
+        //CinnamonCinemaTestData.setLockStatusForTestData();
+        ArrayList<SeatNumber> allocatedSeatsActual =
                 bookingApp.generateSeatNumbers(availableListExpected,
                         CinnamonCinemaTestData.noOfSeats);
-        assertEquals(CinnamonCinemaTestData.allocatedSeatsExpectedEnd,
-                allocatedSeatsActual);
+        for(int i = 0; i < CinnamonCinemaTestData.allocatedSeatsExpectedEnd.size();i++) {
+            assertEquals(CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).getRow(),
+                    allocatedSeatsActual.get(i).getRow());
+            assertEquals(CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).getSeat(),
+                    allocatedSeatsActual.get(i).getSeat());
+            assertEquals(CinnamonCinemaTestData.lockStatus,
+                    allocatedSeatsActual.get(i).isLocked());
+        }
     }
 
     @Test
     public void testGenerateSeatNumbersWithChangeBetweenRows(){
         ArrayList<SeatNumber> availableListExpected =
                 CinnamonCinemaTestData.initialiseAllOccupiedSeats(3);
-        ArrayList<String> allocatedSeatsActual =
+        ArrayList<SeatNumber> allocatedSeatsActual =
                 bookingApp.generateSeatNumbers(availableListExpected,
                         CinnamonCinemaTestData.noOfSeats);
-        assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap,
-                allocatedSeatsActual);
+        for (int i = 0; i < CinnamonCinemaTestData.allocatedSeatsWithRowSwap.size();i++) {
+            assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).getRow(),
+                    allocatedSeatsActual.get(i).getRow());
+            assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).getSeat(),
+                    allocatedSeatsActual.get(i).getSeat());
+            assertEquals(CinnamonCinemaTestData.lockStatus,
+                    allocatedSeatsActual.get(i).isLocked());
+        }
     }
 
 }

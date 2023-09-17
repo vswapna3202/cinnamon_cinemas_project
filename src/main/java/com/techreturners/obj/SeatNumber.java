@@ -8,6 +8,7 @@ public class SeatNumber {
     public SeatNumber(Row row, Seat seat){
         this.row = row;
         this.seat = seat;
+        this.locked = 'N';
     }
 
     public Row getRow() {
@@ -16,5 +17,13 @@ public class SeatNumber {
 
     public Seat getSeat() {
         return seat;
+    }
+
+    public void setLocked(char locked) {
+        this.locked = locked;
+    }
+
+    public char isLocked() {
+        return locked;
     }
 }

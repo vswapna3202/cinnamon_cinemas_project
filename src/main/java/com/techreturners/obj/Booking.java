@@ -18,10 +18,12 @@ public class Booking {
                                         int noOfSeats){
         ClassLoader classLoader = Booking.class.getClassLoader();
         File outputFile = new File(classLoader.getResource(FILE_NAME).getFile());
-        try (
-            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle the exception as needed (e.g., log it)
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+
+
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
         }
         return true;
     }

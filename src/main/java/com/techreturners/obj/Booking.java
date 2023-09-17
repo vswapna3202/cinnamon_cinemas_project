@@ -16,8 +16,14 @@ public class Booking {
 
     public boolean allocateAndSaveSeats(ArrayList<SeatNumber> seatNumbers,
                                         int noOfSeats){
+        ClassLoader classLoader = Booking.class.getClassLoader();
+        File outputFile = new File(classLoader.getResource(FILE_NAME).getFile());
+        try (
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception as needed (e.g., log it)
+        }
         return true;
-
     }
 
     public ArrayList<SeatNumber> checkAvailableSeats(int noOfSeats)
@@ -37,12 +43,15 @@ public class Booking {
                     SeatNumber seatNumber = new SeatNumber(row, seat);
                     availableSeats.add(seatNumber);
                 }
+                bufferedReader.close();
+                inputStream.close();
                 return availableSeats;
             }catch(IOException ioe){
                 throw new IOException("Could not read file, File IO Error occured");
             }catch(NumberFormatException nfe){
                 throw new NumberFormatException("Seat Number was not a number in seatMapping.txt file");
             }
+
         }else{
             throw new FileNotFoundException("File seatMapping.txt not found");
         }

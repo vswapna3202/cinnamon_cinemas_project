@@ -2,6 +2,7 @@ package com.techreturners.obj;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class CinnamonCinemaTestData {
     public static String customerName = "Harry Potter";
@@ -20,11 +21,38 @@ public class CinnamonCinemaTestData {
             customerEmail;
     public static SeatNumber seatNumberOne = new SeatNumber(Row.A,Seat.ONE);
     public static SeatNumber seatNumberTwo = new SeatNumber(Row.A,Seat.TWO);
+    public static SeatNumber seatNumberThree = new SeatNumber(Row.A,Seat.THREE);
+    public static SeatNumber seatNumberFour = new SeatNumber(Row.A,Seat.FOUR);
+    public static SeatNumber seatNumberFive = new SeatNumber(Row.A,Seat.FIVE);
+
+    public static ArrayList<SeatNumber> newSeatsExpected =
+            new ArrayList<>(Arrays.asList(seatNumberThree,seatNumberFour,
+                    seatNumberFive));
 
     public static ArrayList<SeatNumber> availableListExpected =
             new ArrayList<>(Arrays.asList(seatNumberOne, seatNumberTwo));
     public static final int TOTAL_SEATS = 15;
     public static final int TOTAL_FILLED_SEATS = 13;
+    public static final HashMap allSeatMap = new HashMap();
+
+    public static HashMap<Integer, String> initialiseAllSeatMap(){
+        allSeatMap.put(1,"A1");
+        allSeatMap.put(2,"A2");
+        allSeatMap.put(3,"A3");
+        allSeatMap.put(4,"A4");
+        allSeatMap.put(5,"A5");
+        allSeatMap.put(6,"B1");
+        allSeatMap.put(7,"B2");
+        allSeatMap.put(8,"B3");
+        allSeatMap.put(9,"B4");
+        allSeatMap.put(10,"B5");
+        allSeatMap.put(11,"C1");
+        allSeatMap.put(12,"C2");
+        allSeatMap.put(13,"C3");
+        allSeatMap.put(14,"C4");
+        allSeatMap.put(15,"C5");
+        return allSeatMap;
+    }
 
     public static ArrayList<SeatNumber> initialiseAllOccupiedSeats(int n){
         ArrayList<SeatNumber> availableSeatsFull = new ArrayList<>();

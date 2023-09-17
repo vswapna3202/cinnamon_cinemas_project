@@ -79,4 +79,23 @@ public class BookingAppTest {
         assertFalse(isSeatAvailable);
     }
 
+    @Test
+    public void testGenerateSeatNumbers(){
+        ArrayList<SeatNumber> allocatedSeatsActual =
+                bookingApp.generateSeatNumbers(CinnamonCinemaTestData.availableListExpected,
+                        CinnamonCinemaTestData.noOfSeats);
+        assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(0).getRow(),
+                allocatedSeatsActual.get(0).getRow());
+        assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(0).getSeat(),
+                allocatedSeatsActual.get(0).getSeat());
+        assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(1).getRow(),
+                allocatedSeatsActual.get(1).getRow());
+        assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(1).getSeat(),
+                allocatedSeatsActual.get(1).getSeat());
+        assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(2).getRow(),
+                allocatedSeatsActual.get(2).getRow());
+        assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(2).getSeat(),
+                allocatedSeatsActual.get(2).getSeat());
+    }
+
 }

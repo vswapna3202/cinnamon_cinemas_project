@@ -1,5 +1,9 @@
 package com.techreturners.obj;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,6 +29,7 @@ public class CinnamonCinemaTestData {
     public static ArrayList<SeatNumber> newSeatsExpected =
             new ArrayList<>(Arrays.asList(seatNumberThree,seatNumberFour,
                     seatNumberFive));
+    public static String FILE_NAME = "seatMapping.txt";
 
     public static int ticketId = 1000;
     //public static String patternData = "Dear .+";
@@ -90,5 +95,19 @@ public class CinnamonCinemaTestData {
             }
         }
         return availableSeatsFull;
+    }
+
+    public static void testEmptySeatMappingFile() throws IOException {
+        ClassLoader classLoader = CinnamonCinemaTestData.class.getClassLoader();
+        URL resourceURL = classLoader.getResource(FILE_NAME);
+        File outputFile = new File(resourceURL.getFile());
+
+        if (outputFile.exists()) {
+            outputFile.delete();
+        }
+        try(FileWriter writer = new FileWriter(outputFile)) {
+        }catch(IOException ioe) {
+            System.err.println("Error while creating new file"+ioe.getMessage());
+        }
     }
 }

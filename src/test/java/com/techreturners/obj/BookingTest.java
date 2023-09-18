@@ -1,14 +1,13 @@
 package com.techreturners.obj;
 
 import com.techreturners.exception.CustomCinnamonCinemaException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BookingTest {
     Booking booking;
 
@@ -18,13 +17,13 @@ public class BookingTest {
     }
 
     @Test
+    @Order(1)
     public void testCanAllocateSeatsValid(){
-
         assertTrue(booking.canAllocateSeats(CinnamonCinemaTestData.availableListExpected,
                 CinnamonCinemaTestData.noOfSeats));
-
     }
     @Test
+    @Order(2)
     public void testCannotAllocateSeats(){
         assertFalse(booking.canAllocateSeats(
                 CinnamonCinemaTestData.initialiseAllOccupiedSeats(
@@ -34,21 +33,26 @@ public class BookingTest {
     }
 
     @Test
-    public void testAllocateAndSaveSeats() throws CustomCinnamonCinemaException {
+    @Order(3)
+    public void testAllocateAndSaveSeats()
+            throws CustomCinnamonCinemaException,IOException {
+        CinnamonCinemaTestData.testEmptySeatMappingFile();
         assertTrue(booking.allocateAndSaveSeats(
                 CinnamonCinemaTestData.availableListExpected));
     }
 
     @Test
+    @Order(4)
     public void testCheckAvailableSeats() throws IOException {
         assertEquals(CinnamonCinemaTestData.availableListExpected.size(),
                 booking.checkAvailableSeats().size());
     }
 
     @Test
-    @Disabled
-    //seatMapping.txt should be empty to test this condition
-    public void testAllocateAndSaveSeatsException() throws CustomCinnamonCinemaException{
+    @Order(5)
+    public void testAllocateAndSaveSeatsException()
+            throws CustomCinnamonCinemaException, IOException{
+        CinnamonCinemaTestData.testEmptySeatMappingFile();
         booking.allocateAndSaveSeats(CinnamonCinemaTestData.initialiseAllOccupiedSeats(15));
         assertThrows(CustomCinnamonCinemaException.class, () ->
                 booking.allocateAndSaveSeats(
@@ -56,9 +60,7 @@ public class BookingTest {
     }
 
     @Test
-    @Disabled
-    //Test this after testAllocateAndSaveSeatsException is tested
-    //or if seatMapping.txt has 15 rows
+    @Order(6)
     public void testCheckAvailableSeatsWhenAllBooked() throws IOException{
         assertEquals(CinnamonCinemaTestData.TOTAL_SEATS,
                 booking.checkAvailableSeats().size());

@@ -17,9 +17,6 @@ public class CinnamonCinemaTestData {
     public static int noOfSeats = 3;
     public static String invalidNoOfSeats = "a";
     public static int invalidNoOfSeatsOutOfRange = 6;
-    public static String outputString = "Seats have been allocated to " +
-            customerName+ "[ " +customerAddress + ", "+ customerContactNo+" ], "+
-            customerEmail;
     public static SeatNumber seatNumberOne = new SeatNumber(Row.A,Seat.ONE);
     public static SeatNumber seatNumberTwo = new SeatNumber(Row.A,Seat.TWO);
     public static SeatNumber seatNumberThree = new SeatNumber(Row.A,Seat.THREE);
@@ -31,12 +28,13 @@ public class CinnamonCinemaTestData {
 
     public static int ticketId = 1000;
     //public static String patternData = "Dear .+";
-    public static String patternData = "Dear .+\n" +
-            "@ \\[ .+ - Contact:  .+\\] \n" +
-            "Your \\d+ ticket\\(s\\) has been booked \n" +
-            "Your ticket Id is: \\d+ \n" +
-            "It has been emailed to you @ .+\n" +
-            "Your seat numbers are: "+".+";
+    public static String patternData = """
+            Dear .+
+            @ \\[ .+ - Contact:  .+\\]\s
+            Your \\d+ ticket\\(s\\) has been booked\s
+            Your ticket Id is: \\d+\s
+            It has been emailed to you @ .+
+            Your seat numbers are: .+""";
 
     public static ArrayList<SeatNumber> availableListExpected =
             new ArrayList<>(Arrays.asList(seatNumberOne, seatNumberTwo));
@@ -52,7 +50,7 @@ public class CinnamonCinemaTestData {
 
     public static final int TOTAL_SEATS = 15;
     public static final int TOTAL_FILLED_SEATS = 13;
-    public static final HashMap allSeatMap = new HashMap();
+    public static final HashMap<Integer, String> allSeatMap = new HashMap<>();
 
     public static HashMap<Integer, String> initialiseAllSeatMap(){
         allSeatMap.put(1,"A1");
@@ -75,7 +73,7 @@ public class CinnamonCinemaTestData {
 
     public static ArrayList<SeatNumber> initialiseAllOccupiedSeats(int n){
         ArrayList<SeatNumber> availableSeatsFull = new ArrayList<>();
-        int currentSeat = 0;
+        int currentSeat;
         for(int i = 1; i <= n; i++){
             if (i >= 1 && i <= 5){
                 currentSeat = i;

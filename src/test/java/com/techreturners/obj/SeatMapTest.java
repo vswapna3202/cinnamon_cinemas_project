@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SeatMapTest {
     SeatMap seatMapClass;
@@ -17,7 +17,7 @@ public class SeatMapTest {
     @Test
     public void testInitialiseSeatMap(){
         seatMapClass.initialiseSeatMap();
-        HashMap allSeatMapExpected = CinnamonCinemaTestData.initialiseAllSeatMap();
-        assertTrue(seatMapClass.getSeatMap().equals(allSeatMapExpected));
+        HashMap<Integer, String> allSeatMapExpected = CinnamonCinemaTestData.initialiseAllSeatMap();
+        assertEquals(seatMapClass.getSeatMap(), allSeatMapExpected);
     }
 }

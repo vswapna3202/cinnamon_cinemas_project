@@ -30,7 +30,7 @@ public class TerminateBooking extends Thread {
             try{
                 Thread.sleep(10000);
             }catch(InterruptedException ie){
-                System.err.println("TerminateBooking thread was interruped"+
+                System.err.println("TerminateBooking thread was interrupted"+
                         ie.getMessage());
             }
         }

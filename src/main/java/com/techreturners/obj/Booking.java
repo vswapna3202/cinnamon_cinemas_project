@@ -3,6 +3,7 @@ package com.techreturners.obj;
 import com.techreturners.app.BookingApp;
 import com.techreturners.dao.BookingDAO;
 import com.techreturners.dao.BookingFileDAO;
+import com.techreturners.exception.CustomCinnamonCinemaException;
 
 import java.io.*;
 import java.net.URL;
@@ -21,39 +22,10 @@ public class Booking {
         return TOTAL_SEATS_AVAILABLE - seatNumbers.size() >= noOfSeats;
     }
 
-    public boolean allocateAndSaveSeats(ArrayList<SeatNumber> newSeatNumbers,
-                                        int noOfSeats){
+    public boolean allocateAndSaveSeats(ArrayList<SeatNumber> newSeatNumbers)
+            throws CustomCinnamonCinemaException {
         BookingDAO bookingDAO = new BookingFileDAO();
         return bookingDAO.persistDAO(newSeatNumbers);
-        /*
-        ClassLoader classLoader = Booking.class.getClassLoader();
-        URL resourceURL = classLoader.getResource(FILE_NAME);
-        File outputFile;
-        if (resourceURL != null) {
-            outputFile = new File(resourceURL.getFile());
-        }else{
-            outputFile = new File(FILE_NAME);
-        }
-        try {
-            FileChannel channel = FileChannel.open(outputFile.toPath(),
-                    StandardOpenOption.APPEND);
-            Channels.newInputStream(channel);
-            FileLock lock = channel.lock();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true));
-            for (SeatNumber seatNumber : newSeatNumbers) {
-                writer.append(seatNumber.toString());
-                writer.newLine();
-            }
-
-            lock.release();
-            channel.close();
-            writer.close();
-        } catch (IOException ioe) {
-            System.out.println("Unable to allocate and save seats as another" +
-                    "update has occured. Kindly re-try booking" + ioe.getMessage());
-            return false;
-        }
-        return true;*/
     }
 
     public ArrayList<SeatNumber> checkAvailableSeats()

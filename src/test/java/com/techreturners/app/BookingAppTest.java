@@ -1,5 +1,6 @@
 package com.techreturners.app;
 
+import com.techreturners.exception.CustomCinnamonCinemaException;
 import com.techreturners.obj.Booking;
 import com.techreturners.obj.CinnamonCinemaTestData;
 import com.techreturners.obj.SeatNumber;
@@ -24,9 +25,16 @@ public class BookingAppTest {
 
     @Test
     public void testCheckAvailableSeatsValid() throws IOException,
-            NumberFormatException{
+            NumberFormatException, CustomCinnamonCinemaException{
         ArrayList<SeatNumber> availableSeatsActual =
                 bookingApp.checkAvailableSeats(booking);
+        if(availableSeatsActual.isEmpty()){
+            bookingApp.allocateAndSaveSeats(
+                    CinnamonCinemaTestData.availableListExpected,
+                    booking);
+            availableSeatsActual =
+                    bookingApp.checkAvailableSeats(booking);
+        }
 
         Assertions.assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).getRow(),
                 availableSeatsActual.get(0).getRow());
@@ -121,9 +129,9 @@ public class BookingAppTest {
     }
 
     @Test
-    public void testAllocateAndSaveDataValid(){
+    public void testAllocateAndSaveDataValid()
+            throws CustomCinnamonCinemaException {
         assertTrue(bookingApp.allocateAndSaveSeats(CinnamonCinemaTestData.newSeatsExpected,
-                                    CinnamonCinemaTestData.noOfSeats,
                                     booking));
     }
 

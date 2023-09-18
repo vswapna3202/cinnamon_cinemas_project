@@ -19,7 +19,7 @@ public class BookingApp {
             ArrayList<SeatNumber> seatNumbers = checkAvailableSeats(booking);
             if (canAllocateSeats(seatNumbers, noOfSeats, booking)) {
                 ArrayList<SeatNumber> newSeatNumbers = generateSeatNumbers(seatNumbers, noOfSeats);
-                boolean isSaveSuccess = allocateAndSaveSeats(newSeatNumbers, noOfSeats, booking);
+                boolean isSaveSuccess = allocateAndSaveSeats(newSeatNumbers, booking);
                 if (isSaveSuccess){
                     int ticketId = seatNumbers.size()+1000;
                     Ticket ticket = new Ticket(ticketId, newSeatNumbers);
@@ -70,9 +70,9 @@ public class BookingApp {
     }
 
      public boolean allocateAndSaveSeats(ArrayList<SeatNumber> seatNumbers,
-                                        int noOfSeats,
-                                        Booking booking){
-        return booking.allocateAndSaveSeats(seatNumbers, noOfSeats);
+                                        Booking booking)
+             throws CustomCinnamonCinemaException{
+        return booking.allocateAndSaveSeats(seatNumbers);
     }
 
     public static void main(String[] args){

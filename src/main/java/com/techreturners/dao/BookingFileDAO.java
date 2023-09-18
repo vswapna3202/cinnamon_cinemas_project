@@ -1,6 +1,7 @@
 package com.techreturners.dao;
 
 import com.techreturners.app.BookingApp;
+import com.techreturners.exception.CustomCinnamonCinemaException;
 import com.techreturners.obj.Booking;
 import com.techreturners.obj.Row;
 import com.techreturners.obj.Seat;
@@ -8,7 +9,6 @@ import com.techreturners.obj.SeatNumber;
 
 import java.io.*;
 import java.net.URL;
-import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.file.StandardOpenOption;
@@ -16,7 +16,18 @@ import java.util.ArrayList;
 
 public class BookingFileDAO extends BookingDAO {
     public static final String FILE_NAME = "seatMapping.txt";
-    public boolean persistDAO(ArrayList<SeatNumber> newSeatNumbers){
+    public boolean persistDAO(ArrayList<SeatNumber> newSeatNumbers)
+        throws CustomCinnamonCinemaException{
+        try {
+            ArrayList<SeatNumber> seatNumbers = this.fetchDAO();
+            if (seatNumbers.containsAll(newSeatNumbers)){
+                throw new CustomCinnamonCinemaException("Seats requested " +
+                        "already exists in seatMapping.txt "+
+                        "Unable to book tickets. Please try later");
+            }
+        }catch(IOException ioe){
+            System.out.println("Error accessing file seatMapping.txt"+ioe.getMessage());
+        }
         ClassLoader classLoader = Booking.class.getClassLoader();
         URL resourceURL = classLoader.getResource(FILE_NAME);
         File outputFile;
@@ -28,7 +39,6 @@ public class BookingFileDAO extends BookingDAO {
         try {
             FileChannel channel = FileChannel.open(outputFile.toPath(),
                     StandardOpenOption.APPEND);
-            Channels.newInputStream(channel);
             FileLock lock = channel.lock();
             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true));
             for (SeatNumber seatNumber : newSeatNumbers) {

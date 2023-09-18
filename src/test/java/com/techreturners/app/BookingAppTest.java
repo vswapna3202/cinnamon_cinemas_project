@@ -1,6 +1,9 @@
-package com.techreturners.obj;
+package com.techreturners.app;
 
-import com.techreturners.app.BookingApp;
+import com.techreturners.obj.Booking;
+import com.techreturners.obj.CinnamonCinemaTestData;
+import com.techreturners.obj.SeatNumber;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -25,7 +28,7 @@ public class BookingAppTest {
         ArrayList<SeatNumber> availableSeatsActual =
                 bookingApp.checkAvailableSeats(booking);
 
-        assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).getRow(),
+        Assertions.assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).getRow(),
                 availableSeatsActual.get(0).getRow());
         assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).getSeat(),
                 availableSeatsActual.get(0).getSeat());
@@ -56,7 +59,6 @@ public class BookingAppTest {
 
     @Test
     public void testCanAllocatSeatsFalseAllSeatsFull() {
-        ArrayList<SeatNumber> availableListFull = new ArrayList<>();
         //Test when all seats are allocated
         boolean isSeatAvailable = bookingApp.canAllocateSeats(
                 CinnamonCinemaTestData.initialiseAllOccupiedSeats(CinnamonCinemaTestData.TOTAL_SEATS),
@@ -67,8 +69,6 @@ public class BookingAppTest {
 
     @Test
     public void testCanAllocatSeatsFalseWhenNoOfSeatsMoreThanAvailableSeats() {
-        //Test when two seats are available to book but user has requested 3 seats
-        ArrayList<SeatNumber> availableListFull = new ArrayList<>();
         //Test when all seats are allocated
         boolean isSeatAvailable = bookingApp.canAllocateSeats(
                 CinnamonCinemaTestData.initialiseAllOccupiedSeats(CinnamonCinemaTestData.TOTAL_FILLED_SEATS),
@@ -116,7 +116,7 @@ public class BookingAppTest {
             assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).getRow(),
                     allocatedSeatsActual.get(i).getRow());
             assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).getSeat(),
-                    allocatedSeatsActual.get(i).getSeat());;
+                    allocatedSeatsActual.get(i).getSeat());
         }
     }
 

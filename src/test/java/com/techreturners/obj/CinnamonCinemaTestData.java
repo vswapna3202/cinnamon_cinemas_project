@@ -35,6 +35,7 @@ public class CinnamonCinemaTestData {
             Your ticket Id is: \\d+\s
             It has been emailed to you @ .+
             Your seat numbers are: .+""";
+    public static String terminatePattern = "All seats have been booked! Terminating booking app";
 
     public static ArrayList<SeatNumber> availableListExpected =
             new ArrayList<>(Arrays.asList(seatNumberOne, seatNumberTwo));

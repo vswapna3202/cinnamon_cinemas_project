@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TerminateBooking extends Thread {
-    private BookingApp bookingApp;
+    private final BookingApp bookingApp;
     public TerminateBooking(BookingApp bookingApp){
         this.bookingApp = bookingApp;
     }
@@ -30,7 +30,8 @@ public class TerminateBooking extends Thread {
             try{
                 Thread.sleep(10000);
             }catch(InterruptedException ie){
-                System.err.println("TerminateBooking thread was interruped"+ie.getMessage());
+                System.err.println("TerminateBooking thread was interruped"+
+                        ie.getMessage());
             }
         }
     }

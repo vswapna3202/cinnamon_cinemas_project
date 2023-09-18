@@ -36,8 +36,7 @@ public class Customer {
     }
 
     public static Object[] getAndValidateCustomerInput(){
-        Object[] input = Customer.getCustomerInput();
-        return input;
+        return Customer.getCustomerInput();
     }
 
     private static String getUserInput(String prompt,
@@ -54,7 +53,7 @@ public class Customer {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Cinnamon Cinemas!");
         System.out.println("Enter the following details: ");
-        
+
         String prompt = "Enter your name: ";
         String customerName = getUserInput(prompt, scanner);
 

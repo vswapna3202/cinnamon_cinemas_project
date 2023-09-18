@@ -3,8 +3,8 @@ package com.techreturners.obj;
 import java.util.ArrayList;
 
 public class Ticket {
-    private int ticketId;
-    private ArrayList<SeatNumber> seatNumbers;
+    private final int ticketId;
+    private final ArrayList<SeatNumber> seatNumbers;
 
     public Ticket(int ticketId, ArrayList<SeatNumber> seatNumbers){
         this.ticketId = ticketId;
@@ -20,8 +20,8 @@ public class Ticket {
                         +"\nIt has been emailed to you @ "+customer.getCustomerEmail()
                         +"\nYour seat numbers are: ");
         for(SeatNumber seatNumber : seatNumbers){
-            System.out.print("Row: "+String.valueOf(seatNumber.getRow())+" ");
-            System.out.print("Seat: "+String.valueOf(seatNumber.getSeat())+"\n");
+            System.out.print("Row: "+seatNumber.row()+" ");
+            System.out.print("Seat: "+seatNumber.seat()+"\n");
         }
     }
 }

@@ -36,14 +36,14 @@ public class BookingAppTest {
                     bookingApp.checkAvailableSeats(booking);
         }
 
-        Assertions.assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).getRow(),
-                availableSeatsActual.get(0).getRow());
-        assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).getSeat(),
-                availableSeatsActual.get(0).getSeat());
-        assertEquals(CinnamonCinemaTestData.availableListExpected.get(1).getRow(),
-                availableSeatsActual.get(1).getRow());
-        assertEquals(CinnamonCinemaTestData.availableListExpected.get(1).getSeat(),
-                availableSeatsActual.get(1).getSeat());
+        Assertions.assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).row(),
+                availableSeatsActual.get(0).row());
+        assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).seat(),
+                availableSeatsActual.get(0).seat());
+        assertEquals(CinnamonCinemaTestData.availableListExpected.get(1).row(),
+                availableSeatsActual.get(1).row());
+        assertEquals(CinnamonCinemaTestData.availableListExpected.get(1).seat(),
+                availableSeatsActual.get(1).seat());
     }
 
     @Test
@@ -91,10 +91,10 @@ public class BookingAppTest {
                 bookingApp.generateSeatNumbers(CinnamonCinemaTestData.availableListExpected,
                         CinnamonCinemaTestData.noOfSeats);
         for(int i = 0;i < CinnamonCinemaTestData.newSeatsExpected.size(); i++) {
-            assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(i).getRow(),
-                    allocatedSeatsActual.get(i).getRow());
-            assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(i).getSeat(),
-                    allocatedSeatsActual.get(i).getSeat());
+            assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(i).row(),
+                    allocatedSeatsActual.get(i).row());
+            assertEquals(CinnamonCinemaTestData.newSeatsExpected.get(i).seat(),
+                    allocatedSeatsActual.get(i).seat());
         }
     }
 
@@ -106,10 +106,10 @@ public class BookingAppTest {
                 bookingApp.generateSeatNumbers(availableListExpected,
                         CinnamonCinemaTestData.noOfSeats);
         for(int i = 0; i < CinnamonCinemaTestData.allocatedSeatsExpectedEnd.size();i++) {
-            assertEquals(CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).getRow(),
-                    allocatedSeatsActual.get(i).getRow());
-            assertEquals(CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).getSeat(),
-                    allocatedSeatsActual.get(i).getSeat());
+            assertEquals(CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).row(),
+                    allocatedSeatsActual.get(i).row());
+            assertEquals(CinnamonCinemaTestData.allocatedSeatsExpectedEnd.get(i).seat(),
+                    allocatedSeatsActual.get(i).seat());
         }
     }
 
@@ -121,10 +121,10 @@ public class BookingAppTest {
                 bookingApp.generateSeatNumbers(availableListExpected,
                         CinnamonCinemaTestData.noOfSeats);
         for (int i = 0; i < CinnamonCinemaTestData.allocatedSeatsWithRowSwap.size();i++) {
-            assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).getRow(),
-                    allocatedSeatsActual.get(i).getRow());
-            assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).getSeat(),
-                    allocatedSeatsActual.get(i).getSeat());
+            assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).row(),
+                    allocatedSeatsActual.get(i).row());
+            assertEquals(CinnamonCinemaTestData.allocatedSeatsWithRowSwap.get(i).seat(),
+                    allocatedSeatsActual.get(i).seat());
         }
     }
 

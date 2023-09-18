@@ -10,33 +10,35 @@ public class BookingApp {
 
 
     public void startBooking(){
-        Object[] input = Customer.getAndValidateCustomerInput();
-        Customer customer = (Customer) input[0];
-        int noOfSeats = (int) input[1];
+        while(true) {
+            Object[] input = Customer.getAndValidateCustomerInput();
+            Customer customer = (Customer) input[0];
+            int noOfSeats = (int) input[1];
 
-        try {
-            Booking booking = new Booking();
-            ArrayList<SeatNumber> seatNumbers = checkAvailableSeats(booking);
-            if (canAllocateSeats(seatNumbers, noOfSeats, booking)) {
-                ArrayList<SeatNumber> newSeatNumbers = generateSeatNumbers(seatNumbers, noOfSeats);
-                boolean isSaveSuccess = allocateAndSaveSeats(newSeatNumbers, booking);
-                if (isSaveSuccess){
-                    int ticketId = seatNumbers.size()+1000;
-                    Ticket ticket = new Ticket(ticketId, newSeatNumbers);
-                    ticket.displayTicket(customer, noOfSeats);
-                }else{
-                    System.out.println("Your tickets were not booked! Try again later");
+            try {
+                Booking booking = new Booking();
+                ArrayList<SeatNumber> seatNumbers = checkAvailableSeats(booking);
+                if (canAllocateSeats(seatNumbers, noOfSeats, booking)) {
+                    ArrayList<SeatNumber> newSeatNumbers = generateSeatNumbers(seatNumbers, noOfSeats);
+                    boolean isSaveSuccess = allocateAndSaveSeats(newSeatNumbers, booking);
+                    if (isSaveSuccess) {
+                        int ticketId = seatNumbers.size() + 1000;
+                        Ticket ticket = new Ticket(ticketId, newSeatNumbers);
+                        ticket.displayTicket(customer, noOfSeats);
+                    } else {
+                        System.out.println("Your tickets were not booked! Try again later");
+                    }
+                } else {
+                    throw new CustomCinnamonCinemaException("Seats are not available, " +
+                            "cannot proceed with booking");
                 }
-            }else{
-                throw new CustomCinnamonCinemaException("Seats are not available, " +
-                        "cannot proceed with booking");
+            } catch (FileNotFoundException fe) {
+                System.out.println("File seatMapping.txt is not found in folder config");
+            } catch (IOException ioe) {
+                System.out.println("Could not read data from seatMapping.txt file, IOException occurred");
+            } catch (CustomCinnamonCinemaException cex) {
+                System.out.println(cex.getMessage());
             }
-        }catch(FileNotFoundException fe){
-            System.out.println("File seatMapping.txt is not found in folder config");
-        }catch(IOException ioe){
-            System.out.println("Could not read data from seatMapping.txt file, IOException occurred");
-        }catch(CustomCinnamonCinemaException cex){
-            System.out.println(cex.getMessage());
         }
     }
 
@@ -75,8 +77,15 @@ public class BookingApp {
         return booking.allocateAndSaveSeats(seatNumbers);
     }
 
+    public void terminateBooking(){
+        System.out.println("All seats have been booked! Terminating booking app");
+        System.exit(0);
+    }
+
     public static void main(String[] args){
         BookingApp bookingApp = new BookingApp();
+        TerminateBooking terminateBooking = new TerminateBooking(bookingApp);
+        terminateBooking.start();
         bookingApp.startBooking();
     }
 }

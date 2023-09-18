@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class BookingApp {
 
-
     public void startBooking(){
         while(true) {
             Object[] input = Customer.getAndValidateCustomerInput();

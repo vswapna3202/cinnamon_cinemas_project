@@ -55,6 +55,7 @@ public class CinnamonCinemaTestData {
                     new SeatNumber(Row.B, Seat.ONE)));
 
     public static final int TOTAL_SEATS = 15;
+    public static final String INVALID_SEAT_MAP_DATA = "AA";
     public static final int TOTAL_FILLED_SEATS = 13;
     public static final HashMap<Integer, String> allSeatMap = new HashMap<>();
 
@@ -76,6 +77,7 @@ public class CinnamonCinemaTestData {
         allSeatMap.put(15,"C5");
         return allSeatMap;
     }
+
 
     public static ArrayList<SeatNumber> initialiseAllOccupiedSeats(int n){
         ArrayList<SeatNumber> availableSeatsFull = new ArrayList<>();
@@ -106,6 +108,18 @@ public class CinnamonCinemaTestData {
             outputFile.delete();
         }
         try(FileWriter writer = new FileWriter(outputFile)) {
+        }catch(IOException ioe) {
+            System.err.println("Error while creating new file"+ioe.getMessage());
+        }
+    }
+
+    public static void testInvalidSeatMappingFile() throws IOException {
+        ClassLoader classLoader = CinnamonCinemaTestData.class.getClassLoader();
+        URL resourceURL = classLoader.getResource(FILE_NAME);
+        File outputFile = new File(resourceURL.getFile());
+
+        try(FileWriter writer = new FileWriter(outputFile)) {
+            writer.write(CinnamonCinemaTestData.INVALID_SEAT_MAP_DATA);
         }catch(IOException ioe) {
             System.err.println("Error while creating new file"+ioe.getMessage());
         }

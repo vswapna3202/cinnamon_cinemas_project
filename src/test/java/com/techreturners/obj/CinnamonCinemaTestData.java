@@ -40,7 +40,6 @@ public class CinnamonCinemaTestData {
             Your ticket Id is: \\d+\s
             It has been emailed to you @ .+
             Your seat numbers are: .+""";
-    public static String terminatePattern = "All seats have been booked! Terminating booking app";
 
     public static ArrayList<SeatNumber> availableListExpected =
             new ArrayList<>(Arrays.asList(seatNumberOne, seatNumberTwo));
@@ -99,23 +98,30 @@ public class CinnamonCinemaTestData {
         return availableSeatsFull;
     }
 
-    public static void testEmptySeatMappingFile() throws IOException {
+    public static void testEmptySeatMappingFile()  {
         ClassLoader classLoader = CinnamonCinemaTestData.class.getClassLoader();
         URL resourceURL = classLoader.getResource(FILE_NAME);
+        assert resourceURL != null;
         File outputFile = new File(resourceURL.getFile());
 
         if (outputFile.exists()) {
-            outputFile.delete();
+            if (outputFile.delete()){
+                System.out.println("Deleted seatMapping.txt for testing");
+            }else{
+                System.err.println("Error deleting seatMapping.txt for testing");
+            }
         }
         try(FileWriter writer = new FileWriter(outputFile)) {
+            //File has been opened and is emp
         }catch(IOException ioe) {
             System.err.println("Error while creating new file"+ioe.getMessage());
         }
     }
 
-    public static void testInvalidSeatMappingFile() throws IOException {
+    public static void testInvalidSeatMappingFile() {
         ClassLoader classLoader = CinnamonCinemaTestData.class.getClassLoader();
         URL resourceURL = classLoader.getResource(FILE_NAME);
+        assert resourceURL != null;
         File outputFile = new File(resourceURL.getFile());
 
         try(FileWriter writer = new FileWriter(outputFile)) {

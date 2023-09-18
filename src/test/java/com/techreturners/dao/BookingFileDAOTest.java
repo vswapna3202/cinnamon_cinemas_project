@@ -47,8 +47,6 @@ public class BookingFileDAOTest {
     @Order(4)
     public void testFetchInvalidDAO() throws IOException {
         CinnamonCinemaTestData.testInvalidSeatMappingFile();
-        assertThrows(NumberFormatException.class, () -> {
-            bookingDAO.fetchDAO();
-        });
+        assertThrows(NumberFormatException.class, () -> bookingDAO.fetchDAO());
     }
 }

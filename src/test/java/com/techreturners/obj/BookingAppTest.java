@@ -23,8 +23,7 @@ public class BookingAppTest {
     public void testCheckAvailableSeatsValid() throws IOException,
             NumberFormatException{
         ArrayList<SeatNumber> availableSeatsActual =
-                bookingApp.checkAvailableSeats(CinnamonCinemaTestData.noOfSeats,
-                        booking);
+                bookingApp.checkAvailableSeats(booking);
 
         assertEquals(CinnamonCinemaTestData.availableListExpected.get(0).getRow(),
                 availableSeatsActual.get(0).getRow());
@@ -41,8 +40,7 @@ public class BookingAppTest {
     public void testCheckAvailableSeatsEmpty() throws IOException,
             NumberFormatException{
         ArrayList<SeatNumber> availableSeatsActual =
-                bookingApp.checkAvailableSeats(CinnamonCinemaTestData.noOfSeats,
-                        booking);
+                bookingApp.checkAvailableSeats(booking);
 
         assertEquals(0,
                 availableSeatsActual.size());

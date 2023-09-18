@@ -1,6 +1,8 @@
 package com.techreturners.obj;
 
 import com.techreturners.app.BookingApp;
+import com.techreturners.dao.BookingDAO;
+import com.techreturners.dao.BookingFileDAO;
 
 import java.io.*;
 import java.net.URL;
@@ -21,6 +23,9 @@ public class Booking {
 
     public boolean allocateAndSaveSeats(ArrayList<SeatNumber> newSeatNumbers,
                                         int noOfSeats){
+        BookingDAO bookingDAO = new BookingFileDAO();
+        return bookingDAO.persistDAO(newSeatNumbers);
+        /*
         ClassLoader classLoader = Booking.class.getClassLoader();
         URL resourceURL = classLoader.getResource(FILE_NAME);
         File outputFile;
@@ -48,40 +53,14 @@ public class Booking {
                     "update has occured. Kindly re-try booking" + ioe.getMessage());
             return false;
         }
-        return true;
+        return true;*/
     }
 
-    public ArrayList<SeatNumber> checkAvailableSeats(int noOfSeats)
+    public ArrayList<SeatNumber> checkAvailableSeats()
             throws IOException,
                    NumberFormatException{
-        String fileName = FILE_NAME;
-        ClassLoader classLoader = BookingApp.class.getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(FILE_NAME);
-        ArrayList<SeatNumber> availableSeats = new ArrayList<>();
-        if (inputStream != null) {
-            try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    if(!line.isEmpty()) {
-                        Row row = Row.valueOf(line.substring(0, 1));
-                        Seat seat = Seat.fromInt(Integer.parseInt(line.substring(1)));
-                        SeatNumber seatNumber = new SeatNumber(row, seat);
-                        availableSeats.add(seatNumber);
-                    }
-                }
-                bufferedReader.close();
-                inputStream.close();
-                return availableSeats;
-            }catch(IOException ioe){
-                throw new IOException("Could not read file, File IO Error occured");
-            }catch(NumberFormatException nfe){
-                throw new NumberFormatException("Seat Number was not a number in seatMapping.txt file");
-            }
-
-        }//else{
-           // throw new FileNotFoundException("File seatMapping.txt not found");
-        //}
+        BookingDAO bookingDAO = new BookingFileDAO();
+        ArrayList<SeatNumber> availableSeats = bookingDAO.fetchDAO();
         return availableSeats;
     }
 }

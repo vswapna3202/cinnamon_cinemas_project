@@ -16,7 +16,7 @@ public class BookingApp {
 
         try {
             Booking booking = new Booking();
-            ArrayList<SeatNumber> seatNumbers = checkAvailableSeats(noOfSeats, booking);
+            ArrayList<SeatNumber> seatNumbers = checkAvailableSeats(booking);
             if (canAllocateSeats(seatNumbers, noOfSeats, booking)) {
                 ArrayList<SeatNumber> newSeatNumbers = generateSeatNumbers(seatNumbers, noOfSeats);
                 boolean isSaveSuccess = allocateAndSaveSeats(newSeatNumbers, noOfSeats, booking);
@@ -40,10 +40,9 @@ public class BookingApp {
         }
     }
 
-    public ArrayList<SeatNumber> checkAvailableSeats(int noOfSeats,
-                                                     Booking booking)
+    public ArrayList<SeatNumber> checkAvailableSeats(Booking booking)
                 throws IOException, NumberFormatException{
-        return booking.checkAvailableSeats(noOfSeats);
+        return booking.checkAvailableSeats();
     }
 
     public boolean canAllocateSeats(ArrayList<SeatNumber> seatNumbers,

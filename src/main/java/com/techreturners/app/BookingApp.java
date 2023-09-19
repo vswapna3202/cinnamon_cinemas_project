@@ -41,7 +41,7 @@ public class BookingApp {
         }
     }
 
-    public ArrayList<SeatNumber> checkAvailableSeats(Booking booking)
+        public ArrayList<SeatNumber> checkAvailableSeats(Booking booking)
                 throws IOException, NumberFormatException{
         return booking.checkAvailableSeats();
     }
@@ -73,7 +73,7 @@ public class BookingApp {
      public boolean allocateAndSaveSeats(ArrayList<SeatNumber> seatNumbers,
                                         Booking booking)
              throws CustomCinnamonCinemaException{
-        return booking.allocateAndSaveSeats(seatNumbers);
+        return booking.saveSeats(seatNumbers);
     }
 
     public void terminateBooking(){

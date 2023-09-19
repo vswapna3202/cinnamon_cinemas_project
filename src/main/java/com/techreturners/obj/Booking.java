@@ -8,14 +8,14 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Booking {
-    public static final int TOTAL_SEATS_AVAILABLE = 15;
+    private static final int TOTAL_SEATS_AVAILABLE = 15;
 
     public boolean canAllocateSeats(ArrayList<SeatNumber> seatNumbers,
                                     int noOfSeats){
         return TOTAL_SEATS_AVAILABLE - seatNumbers.size() >= noOfSeats;
     }
 
-    public boolean allocateAndSaveSeats(ArrayList<SeatNumber> newSeatNumbers)
+    public boolean saveSeats(ArrayList<SeatNumber> newSeatNumbers)
             throws CustomCinnamonCinemaException {
         BookingDAO bookingDAO = new BookingFileDAO();
         return bookingDAO.persistDAO(newSeatNumbers);

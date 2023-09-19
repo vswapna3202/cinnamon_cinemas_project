@@ -37,7 +37,7 @@ public class BookingTest {
     public void testAllocateAndSaveSeats()
             throws CustomCinnamonCinemaException,IOException {
         CinnamonCinemaTestData.testEmptySeatMappingFile();
-        assertTrue(booking.allocateAndSaveSeats(
+        assertTrue(booking.saveSeats(
                 CinnamonCinemaTestData.availableListExpected));
     }
 
@@ -53,9 +53,9 @@ public class BookingTest {
     public void testAllocateAndSaveSeatsException()
             throws CustomCinnamonCinemaException, IOException{
         CinnamonCinemaTestData.testEmptySeatMappingFile();
-        booking.allocateAndSaveSeats(CinnamonCinemaTestData.initialiseAllOccupiedSeats(15));
+        booking.saveSeats(CinnamonCinemaTestData.initialiseAllOccupiedSeats(15));
         assertThrows(CustomCinnamonCinemaException.class, () ->
-                booking.allocateAndSaveSeats(
+                booking.saveSeats(
                         CinnamonCinemaTestData.availableListExpected));
     }
 

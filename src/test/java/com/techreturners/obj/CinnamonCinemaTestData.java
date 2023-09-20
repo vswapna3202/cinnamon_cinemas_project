@@ -36,7 +36,7 @@ public class CinnamonCinemaTestData {
     public static String patternData = """
             Dear .+
             @ \\[ .+ - Contact:  .+\\]\s
-            Your \\d+ ticket\\(s\\) has been booked\s
+            Your \\d+ seat\\(s\\) has been booked\s
             Your ticket Id is: \\d+\s
             It has been emailed to you @ .+
             Your seat numbers are: .+""";

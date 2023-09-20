@@ -15,7 +15,7 @@ public class Ticket {
         System.out.println("Dear "+customer.getCustomerName()+"\n@ [ "
                         +customer.getCustomerAddress()+" - Contact:  "
                         +customer.getCustomerContactNo()+"] \n"
-                        +"Your "+ noOfSeats+ " ticket(s) has been booked "
+                        +"Your "+ noOfSeats+ " seat(s) has been booked "
                         +"\nYour ticket Id is: "+this.ticketId+" "
                         +"\nIt has been emailed to you @ "+customer.getCustomerEmail()
                         +"\nYour seat numbers are: ");

@@ -118,6 +118,9 @@ public class CinnamonCinemaTestData {
         }
     }
 
+    /* This method writes an invalid seat number to seatMapping.txt file to
+    be used by Test classes.
+     */
     public static void testInvalidSeatMappingFile() {
         ClassLoader classLoader = CinnamonCinemaTestData.class.getClassLoader();
         URL resourceURL = classLoader.getResource(FILE_NAME);

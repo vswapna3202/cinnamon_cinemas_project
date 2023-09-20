@@ -21,7 +21,7 @@ public class BookingFileDAOTest {
     @Test
     @Order(1)
     public void testPersistDAO()
-            throws CustomCinnamonCinemaException, IOException {
+            throws CustomCinnamonCinemaException {
         CinnamonCinemaTestData.testEmptySeatMappingFile();
         assertTrue(bookingDAO.persistDAO(CinnamonCinemaTestData.availableListExpected));
     }
@@ -40,12 +40,11 @@ public class BookingFileDAOTest {
         CinnamonCinemaTestData.testEmptySeatMappingFile();
         ArrayList<SeatNumber> fetchedResult = bookingDAO.fetchDAO();
         assertEquals(0, fetchedResult.size());
-
     }
 
     @Test
     @Order(4)
-    public void testFetchInvalidDAO() throws IOException {
+    public void testFetchInvalidDAO() {
         CinnamonCinemaTestData.testInvalidSeatMappingFile();
         assertThrows(NumberFormatException.class, () -> bookingDAO.fetchDAO());
     }

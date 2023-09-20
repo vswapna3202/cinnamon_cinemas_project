@@ -57,7 +57,7 @@ public class BookingAppTest {
 
     @Test
     @Order(3)
-    public void testCanAllocatSeatsTrue() {
+    public void testCanAllocateSeatsTrue() {
         //Test when only two seats are allocated and customer wants to book 3 seats
         assertTrue(bookingApp.canAllocateSeats(CinnamonCinemaTestData.availableListExpected,
                 CinnamonCinemaTestData.noOfSeats,
@@ -66,7 +66,7 @@ public class BookingAppTest {
 
     @Test
     @Order(4)
-    public void testCanAllocatSeatsFalseAllSeatsFull() {
+    public void testCanAllocateSeatsFalseAllSeatsFull() {
         //Test when all seats are allocated
         boolean isSeatAvailable = bookingApp.canAllocateSeats(
                 CinnamonCinemaTestData.initialiseAllOccupiedSeats(CinnamonCinemaTestData.TOTAL_SEATS),
@@ -77,7 +77,7 @@ public class BookingAppTest {
 
     @Test
     @Order(5)
-    public void testCanAllocatSeatsFalseWhenNoOfSeatsMoreThanAvailableSeats() {
+    public void testCanAllocateSeatsFalseWhenNoOfSeatsMoreThanAvailableSeats() {
         //Test when all seats are allocated
         boolean isSeatAvailable = bookingApp.canAllocateSeats(
                 CinnamonCinemaTestData.initialiseAllOccupiedSeats(CinnamonCinemaTestData.TOTAL_FILLED_SEATS),

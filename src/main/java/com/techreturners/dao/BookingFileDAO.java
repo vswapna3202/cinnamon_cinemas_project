@@ -80,7 +80,7 @@ public class BookingFileDAO extends BookingDAO {
                 inputStream.close();
                 return availableSeats;
             }catch(IOException ioe){
-                throw new IOException("Could not read file, File IO Error occured");
+                throw new IOException("Could not read file, File IO Error occurred");
             }catch(NumberFormatException nfe){
                 throw new NumberFormatException("Seat Number was not a number in seatMapping.txt file");
             }

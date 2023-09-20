@@ -12,6 +12,8 @@ public class Booking {
 
     public boolean canAllocateSeats(ArrayList<SeatNumber> seatNumbers,
                                     int noOfSeats){
+        // false is returned if seats remaining is less than noOfSeats
+        // requested
         return TOTAL_SEATS_AVAILABLE - seatNumbers.size() >= noOfSeats;
     }
 

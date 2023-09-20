@@ -19,6 +19,8 @@ public class BookingFileDAO extends BookingDAO {
     public boolean persistDAO(ArrayList<SeatNumber> newSeatNumbers)
         throws CustomCinnamonCinemaException{
         try {
+            // Fetch seatNumbers already allocated check if another
+            // booking has happened before persisting and allocating
             ArrayList<SeatNumber> seatNumbers = this.fetchDAO();
             if (seatNumbers.containsAll(newSeatNumbers)){
                 throw new CustomCinnamonCinemaException("Seats requested " +
@@ -45,18 +47,17 @@ public class BookingFileDAO extends BookingDAO {
                 writer.append(seatNumber.toString());
                 writer.newLine();
             }
-
             lock.release();
             channel.close();
             writer.close();
         } catch (IOException ioe) {
             System.out.println("Unable to allocate and save seats as another" +
-                    "update has occured. Kindly re-try booking" + ioe.getMessage());
+                    "update has occurred. Kindly re-try booking" + ioe.getMessage());
             return false;
         }
         return true;
-
     }
+
     public  ArrayList<SeatNumber> fetchDAO()
             throws IOException, NumberFormatException{
         ClassLoader classLoader = BookingApp.class.getClassLoader();
@@ -87,5 +88,4 @@ public class BookingFileDAO extends BookingDAO {
            throw new FileNotFoundException("File seatMapping.txt not found");
         }
     }
-
 }

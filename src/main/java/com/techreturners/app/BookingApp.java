@@ -71,13 +71,13 @@ public class BookingApp {
         seatMap.initialiseSeatMap();
         for (int i=0 ; i < noOfSeats; i++) {
             // Add 1 to existing seatNumbers and get the row and SeatNumber from
-            // seatmap
+            // seatMap
             String rowSeatNumber = seatMap.getSeatMap().get(seatAllocatedSize + 1);
             String rowStr = rowSeatNumber.substring(0,1);
             String seatStr = rowSeatNumber.substring(1);
             SeatNumber newRowSeatNumber = new SeatNumber(Row.valueOf(rowStr),
                     Seat.fromInt(Integer.parseInt(seatStr)));
-            // Add new seat numbers to new seat numebrs and do this for requested
+            // Add new seat numbers to new seat numbers and do this for requested
             // number of seats
             newSeatNumbers.add(newRowSeatNumber);
             seatAllocatedSize++;

@@ -78,6 +78,9 @@ public class CinnamonCinemaTestData {
     }
 
 
+    /* This method initialises all seats as occupied and saves all 15 seatNumbers
+    in arrayList to be used for testing.
+     */
     public static ArrayList<SeatNumber> initialiseAllOccupiedSeats(int n){
         ArrayList<SeatNumber> availableSeatsFull = new ArrayList<>();
         int currentSeat;
@@ -98,6 +101,9 @@ public class CinnamonCinemaTestData {
         return availableSeatsFull;
     }
 
+    /* This method empties the seatMapping.txt file so test cases can check
+    for empty condition or insert data depending on the test scenario
+     */
     public static void testEmptySeatMappingFile()  {
         ClassLoader classLoader = CinnamonCinemaTestData.class.getClassLoader();
         URL resourceURL = classLoader.getResource(FILE_NAME);
@@ -112,7 +118,7 @@ public class CinnamonCinemaTestData {
             }
         }
         try(FileWriter writer = new FileWriter(outputFile)) {
-            //File has been opened and is emp
+            //File has been opened and is empty as we need empty file for testing
         }catch(IOException ioe) {
             System.err.println("Error while creating new file"+ioe.getMessage());
         }
